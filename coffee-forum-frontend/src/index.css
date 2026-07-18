@@ -124,6 +124,9 @@ h2 { color: #4a2c2a; }
 .category-list li, .thread-list li {
   padding: 0;
 }
+.thread-list li {
+  position: relative;
+}
 .category-card-link, .thread-card-link {
   display: block;
   padding: 1rem;
@@ -138,6 +141,11 @@ h2 { color: #4a2c2a; }
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+}
+.thread-card-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
 }
 .thread-card-meta {
   color: #888;
@@ -249,6 +257,8 @@ button:disabled:active { transform: none; box-shadow: var(--toon-shadow-sm); }
   margin-top: 0.5rem;
 }
 .thread-list .tag-cloud {
+  position: relative;
+  z-index: 1;
   margin-top: 0;
   padding: 0 1rem 1rem;
 }
