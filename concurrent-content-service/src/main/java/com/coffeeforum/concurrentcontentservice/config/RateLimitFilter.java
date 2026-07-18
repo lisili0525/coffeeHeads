@@ -38,19 +38,26 @@ public class RateLimitFilter extends OncePerRequestFilter {
             return;
         }
 
-        String identifier = getIdentifier(request);
-        String key = "rate:" + identifier + ":" + request.getMethod() + ":" + request.getRequestURI();
+        try {
+            String identifier = getIdentifier(request);
+            String key = "rate:" + identifier + ":" + request.getMethod() + ":" + request.getRequestURI();
 
-        Long count = redisTemplate.opsForValue().increment(key);
-        if (count != null && count == 1L) {
-            redisTemplate.expire(key, WINDOW);
-        }
+            Long count = redisTemplate.opsForValue().increment(key);
+            if (count != null && count == 1L) {
+                redisTemplate.expire(key, WINDOW);
+            }
 
-        if (count != null && count > LIMIT) {
-            response.setStatus(429); // Too Many Requests
-            response.setContentType("application/json");
-            response.getWriter().write("{\"error\":\"Rate limit exceeded. Try again later.\"}");
-            return;
+            if (count != null && count > LIMIT) {
+                response.setStatus(429);
+                response.setContentType("application/json");
+                response.getWriter().write("{\"error\":\"Rate limit exceeded. Try again later.\"}");
+                return;
+            }
+        } catch (Exception e) {
+            // Redis unavailable — fail OPEN (allow the request through) rather than
+            // blocking all traffic. Rate limiting is a protective feature; losing it
+            // temporarily is far better than an outage taking down the whole API.
+            logger.warn("Rate limiter unavailable, allowing request through: " + e.getMessage());
         }
 
         filterChain.doFilter(request, response);
