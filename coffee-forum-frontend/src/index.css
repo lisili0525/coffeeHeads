@@ -121,10 +121,10 @@ h2 { color: #4a2c2a; }
   color: #6f4e37;
   text-decoration: none;
 }
-.category-list li {
+.category-list li, .thread-list li {
   padding: 0;
 }
-.category-card-link {
+.category-card-link, .thread-card-link {
   display: block;
   padding: 1rem;
 }
@@ -132,6 +132,16 @@ h2 { color: #4a2c2a; }
   margin-bottom: 0;
   color: #4a2c2a;
   font-size: 1rem;
+  font-weight: normal;
+}
+.thread-card-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.thread-card-meta {
+  color: #888;
+  font-size: 0.9rem;
   font-weight: normal;
 }
 .meta { color: #888; font-size: 0.9rem; }
@@ -160,7 +170,8 @@ button {
   background: #6f4e37;
   color: white;
   border: 2px solid var(--ink);
-  padding: 0.6rem 1.2rem;
+  min-height: 44px;
+  padding: 0.75rem 1.35rem;
   border-radius: 999px;
   cursor: pointer;
   font-size: 1rem;
@@ -213,7 +224,8 @@ button:disabled:active { transform: none; box-shadow: var(--toon-shadow-sm); }
 }
 .btn-primary, .btn-secondary {
   display: inline-block;
-  padding: 0.7rem 1.4rem;
+  min-height: 44px;
+  padding: 0.8rem 1.45rem;
   border-radius: 999px;
   border: 2px solid var(--ink);
   text-decoration: none;
@@ -236,9 +248,14 @@ button:disabled:active { transform: none; box-shadow: var(--toon-shadow-sm); }
   gap: 0.5rem;
   margin-top: 0.5rem;
 }
+.thread-list .tag-cloud {
+  margin-top: 0;
+  padding: 0 1rem 1rem;
+}
 .tag-badge {
   display: inline-block;
-  padding: 0.2rem 0.8rem;
+  min-height: 34px;
+  padding: 0.35rem 0.85rem;
   background: #f0e6d8;
   color: #6f4e37;
   border: 2px solid var(--ink);
@@ -255,8 +272,9 @@ button:disabled:active { transform: none; box-shadow: var(--toon-shadow-sm); }
   margin-top: 0.5rem;
 }
 .item-actions button {
-  padding: 0.3rem 0.8rem;
-  font-size: 0.85rem;
+  min-height: 40px;
+  padding: 0.45rem 0.95rem;
+  font-size: 0.9rem;
   background: transparent;
   color: #6f4e37;
   border: 2px solid #6f4e37;

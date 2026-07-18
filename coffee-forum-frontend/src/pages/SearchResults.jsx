@@ -31,8 +31,10 @@ export default function SearchResults() {
       <ul className="thread-list">
         {threads.map((t) => (
           <li key={t.id}>
-            <Link to={`/threads/${t.slug}`}>{t.title}</Link>
-            <span> by {t.author.displayName} · {t.viewCount} views</span>
+            <Link to={`/threads/${t.slug}`} className="thread-card-link">
+              <span>{t.title}</span>
+              <span className="thread-card-meta">by {t.author.displayName} · {t.viewCount} views</span>
+            </Link>
             {t.tags?.length > 0 && (
               <div className="tag-cloud">
                 {t.tags.map((tag) => (

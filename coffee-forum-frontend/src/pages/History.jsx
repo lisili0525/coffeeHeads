@@ -16,8 +16,10 @@ export default function History() {
       <ul className="thread-list">
         {views.map((v) => (
           <li key={v.id}>
-            <Link to={`/threads/${v.thread.slug}`}>{v.thread.title}</Link>
-            <span className="meta"> · viewed {new Date(v.viewedAt).toLocaleString()}</span>
+            <Link to={`/threads/${v.thread.slug}`} className="thread-card-link">
+              <span>{v.thread.title}</span>
+              <span className="thread-card-meta">viewed {new Date(v.viewedAt).toLocaleString()}</span>
+            </Link>
           </li>
         ))}
       </ul>
