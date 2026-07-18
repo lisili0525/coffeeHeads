@@ -1,6 +1,7 @@
 package com.coffeeforum.concurrentcontentservice.controller;
 
 import com.coffeeforum.concurrentcontentservice.dto.CreateReplyRequest;
+import com.coffeeforum.concurrentcontentservice.dto.UpdateReplyRequest;
 import com.coffeeforum.concurrentcontentservice.model.ForumThread;
 import com.coffeeforum.concurrentcontentservice.model.Reply;
 import com.coffeeforum.concurrentcontentservice.model.User;
@@ -28,6 +29,10 @@ public class ReplyController {
         this.replyRepository = replyRepository;
         this.threadRepository = threadRepository;
         this.userRepository = userRepository;
+    }
+
+    private boolean canModify(Reply reply, User user) {
+        return user.getRole() == User.Role.ADMIN || reply.getUser().getId().equals(user.getId());
     }
 
     @GetMapping("/threads/{threadId}/replies")
@@ -67,5 +72,49 @@ public class ReplyController {
 
         Reply saved = replyRepository.save(reply);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    }
+
+    @PutMapping("/threads/{threadId}/replies/{replyId}")
+    public ResponseEntity<?> updateReply(@PathVariable Long threadId,
+                                          @PathVariable Long replyId,
+                                          @Valid @RequestBody UpdateReplyRequest request,
+                                          Authentication authentication) {
+        Reply reply = replyRepository.findById(replyId).orElse(null);
+        if (reply == null || !reply.getThread().getId().equals(threadId)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Reply not found");
+        }
+
+        User user = userRepository.findByEmail(authentication.getName()).orElse(null);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticated user not found");
+        }
+        if (!canModify(reply, user)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Not the author of this reply");
+        }
+
+        reply.setBody(request.getBody());
+        Reply saved = replyRepository.save(reply);
+        return ResponseEntity.ok(saved);
+    }
+
+    @DeleteMapping("/threads/{threadId}/replies/{replyId}")
+    public ResponseEntity<?> deleteReply(@PathVariable Long threadId,
+                                          @PathVariable Long replyId,
+                                          Authentication authentication) {
+        Reply reply = replyRepository.findById(replyId).orElse(null);
+        if (reply == null || !reply.getThread().getId().equals(threadId)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Reply not found");
+        }
+
+        User user = userRepository.findByEmail(authentication.getName()).orElse(null);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticated user not found");
+        }
+        if (!canModify(reply, user)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Not the author of this reply");
+        }
+
+        replyRepository.delete(reply);
+        return ResponseEntity.noContent().build();
     }
 }

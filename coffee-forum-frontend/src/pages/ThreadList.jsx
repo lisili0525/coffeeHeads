@@ -6,11 +6,13 @@ import Pagination from "../components/Pagination";
 
 export default function ThreadList() {
   const { categoryId } = useParams();
+  const [category, setCategory] = useState(null);
   const [threads, setThreads] = useState([]);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [tags, setTags] = useState("");
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -24,6 +26,10 @@ export default function ThreadList() {
   }
 
   useEffect(() => {
+    api.getCategory(categoryId).then(setCategory).catch(console.error);
+  }, [categoryId]);
+
+  useEffect(() => {
     api.getThreadsByCategory(categoryId, page).then((data) => {
       setThreads(data.content);
       setTotalPages(data.totalPages);
@@ -33,8 +39,9 @@ export default function ThreadList() {
   async function handleCreate(e) {
     e.preventDefault();
     const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") + "-" + Date.now();
+    const tagNames = tags.split(",").map((t) => t.trim()).filter(Boolean);
     try {
-      const created = await api.createThread(Number(categoryId), title, slug, body);
+      const created = await api.createThread(Number(categoryId), title, slug, body, tagNames);
       navigate(`/threads/${created.slug}`);
     } catch (err) {
       alert(err.message);
@@ -43,12 +50,21 @@ export default function ThreadList() {
 
   return (
     <div>
-      <h2>Threads</h2>
+      <h2>{category ? category.name : "Threads"}</h2>
       <ul className="thread-list">
         {threads.map((t) => (
           <li key={t.id}>
             <Link to={`/threads/${t.slug}`}>{t.title}</Link>
             <span> by {t.author.displayName} · {t.viewCount} views</span>
+            {t.tags?.length > 0 && (
+              <div className="tag-cloud">
+                {t.tags.map((tag) => (
+                  <Link key={tag.id} to={`/tags/${tag.name}/threads`} className="tag-badge">
+                    {tag.name}
+                  </Link>
+                ))}
+              </div>
+            )}
           </li>
         ))}
       </ul>
@@ -61,6 +77,8 @@ export default function ThreadList() {
             onChange={(e) => setTitle(e.target.value)} required />
           <textarea placeholder="Body" value={body}
             onChange={(e) => setBody(e.target.value)} required />
+          <input placeholder="Tags (comma separated, optional)" value={tags}
+            onChange={(e) => setTags(e.target.value)} />
           <button type="submit">Post</button>
         </form>
       )}

@@ -58,6 +58,7 @@ public class SecurityConfig {
             .requestMatchers("/users/register", "/auth/login").permitAll()
             .requestMatchers(HttpMethod.GET, "/categories/**").permitAll()
             .requestMatchers(HttpMethod.GET, "/threads/**").permitAll()
+            .requestMatchers(HttpMethod.GET, "/tags/**").permitAll()
             .requestMatchers(HttpMethod.POST, "/categories/**").hasRole("ADMIN")
             .anyRequest().authenticated()
         )

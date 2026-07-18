@@ -39,6 +39,8 @@ export const api = {
   getCategories: (page = 0, size = 10) =>
     request(`/categories?page=${page}&size=${size}`),
 
+  getCategory: (id) => request(`/categories/${id}`),
+
   createCategory: (name, slug, description) =>
     request("/categories", {
       method: "POST",
@@ -51,13 +53,27 @@ export const api = {
   getThreadsByCategory: (categoryId, page = 0, size = 10) =>
     request(`/threads/category/${categoryId}?page=${page}&size=${size}`),
 
+  getThreadsByTag: (tagName, page = 0, size = 10) =>
+    request(`/threads/tag/${encodeURIComponent(tagName)}?page=${page}&size=${size}`),
+
+  searchThreads: (q, page = 0, size = 10) =>
+    request(`/threads/search?q=${encodeURIComponent(q)}&page=${page}&size=${size}`),
+
   getThread: (slug) => request(`/threads/${slug}`),
 
-  createThread: (categoryId, title, slug, body) =>
+  createThread: (categoryId, title, slug, body, tagNames = []) =>
     request("/threads", {
       method: "POST",
-      body: JSON.stringify({ categoryId, title, slug, body }),
+      body: JSON.stringify({ categoryId, title, slug, body, tagNames }),
     }),
+
+  updateThread: (id, title, body, tagNames = []) =>
+    request(`/threads/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({ title, body, tagNames }),
+    }),
+
+  deleteThread: (id) => request(`/threads/${id}`, { method: "DELETE" }),
 
   getReplies: (threadId) => request(`/threads/${threadId}/replies`),
 
@@ -66,6 +82,17 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ body, idempotencyKey }),
     }),
+
+  updateReply: (threadId, replyId, body) =>
+    request(`/threads/${threadId}/replies/${replyId}`, {
+      method: "PUT",
+      body: JSON.stringify({ body }),
+    }),
+
+  deleteReply: (threadId, replyId) =>
+    request(`/threads/${threadId}/replies/${replyId}`, { method: "DELETE" }),
+
+  getTags: () => request("/tags"),
 
   getMyHistory: () => request("/users/me/history"),
 };

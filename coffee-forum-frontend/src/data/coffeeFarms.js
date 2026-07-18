@@ -1,0 +1,66 @@
+// lat/lng in decimal degrees, used to project markers onto the equirectangular WorldMap.
+export const coffeeFarms = [
+  {
+    name: "Yirgacheffe",
+    country: "Ethiopia",
+    lat: 6.2,
+    lng: 38.2,
+    note: "Considered the birthplace of Arabica coffee, and the setting of the Kaldi goat-herder legend.",
+  },
+  {
+    name: "Huila",
+    country: "Colombia",
+    lat: 2.5,
+    lng: -75.5,
+    note: "High-altitude Andean region known for balanced, fruity Arabica.",
+  },
+  {
+    name: "Minas Gerais",
+    country: "Brazil",
+    lat: -19.9,
+    lng: -43.9,
+    note: "Brazil's largest coffee-producing state - the world's biggest coffee exporter overall.",
+  },
+  {
+    name: "Antigua",
+    country: "Guatemala",
+    lat: 14.6,
+    lng: -90.7,
+    note: "Volcanic soil region famous for smoky, spiced Arabica.",
+  },
+  {
+    name: "Boquete",
+    country: "Panama",
+    lat: 8.78,
+    lng: -82.44,
+    note: "Home of Hacienda La Esmeralda and the prized, floral Geisha variety.",
+  },
+  {
+    name: "Tarrazu",
+    country: "Costa Rica",
+    lat: 9.65,
+    lng: -83.93,
+    note: "High-elevation region known for bright, clean cups.",
+  },
+  {
+    name: "Blue Mountains",
+    country: "Jamaica",
+    lat: 18.1,
+    lng: -76.6,
+    note: "Source of the famously rare and expensive Blue Mountain coffee.",
+  },
+  {
+    name: "Mandheling",
+    country: "Indonesia (Sumatra)",
+    lat: 2.6,
+    lng: 98.9,
+    note: "Known for wet-hulled (giling basah) processing and earthy, full-bodied cups.",
+  },
+  {
+    name: "Kona",
+    country: "USA (Hawaii)",
+    lat: 19.6,
+    lng: -155.9,
+    note: "One of the only coffee-growing regions in the continental United States' territory.",
+  },
+];

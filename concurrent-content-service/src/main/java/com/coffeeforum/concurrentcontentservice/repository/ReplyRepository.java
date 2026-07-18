@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
     List<Reply> findByThreadId(Long threadId);
     Optional<Reply> findByIdempotencyKey(String idempotencyKey);
+    void deleteByThreadId(Long threadId);
 }

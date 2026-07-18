@@ -2,6 +2,9 @@ package com.coffeeforum.concurrentcontentservice.model;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "threads")
 public class ForumThread {
@@ -33,6 +36,14 @@ public class ForumThread {
 
     @Column(name = "view_count", nullable = false)
     private Integer viewCount = 0;
+
+    @ManyToMany
+    @JoinTable(
+        name = "thread_tags",
+        joinColumns = @JoinColumn(name = "thread_id"),
+        inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private Set<Tag> tags = new HashSet<>();
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private java.time.Instant createdAt;
@@ -76,6 +87,9 @@ public class ForumThread {
 
     public Integer getViewCount() { return viewCount; }
     public void setViewCount(Integer viewCount) { this.viewCount = viewCount; }
+
+    public Set<Tag> getTags() { return tags; }
+    public void setTags(Set<Tag> tags) { this.tags = tags; }
 
     public java.time.Instant getCreatedAt() { return createdAt; }
     public java.time.Instant getUpdatedAt() { return updatedAt; }

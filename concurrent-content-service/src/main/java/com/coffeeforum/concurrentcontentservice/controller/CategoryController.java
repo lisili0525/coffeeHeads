@@ -5,6 +5,8 @@ import com.coffeeforum.concurrentcontentservice.repository.CategoryRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,6 +27,15 @@ public class CategoryController {
     @GetMapping
     public Page<Category> getAllCategories(@PageableDefault(size = 10) Pageable pageable) {
         return categoryRepository.findAll(pageable);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getCategory(@PathVariable Long id) {
+        Category category = categoryRepository.findById(id).orElse(null);
+        if (category == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category not found");
+        }
+        return ResponseEntity.ok(category);
     }
 
     @PostMapping

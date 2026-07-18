@@ -10,9 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "prop-types": "^15.8.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-router-dom": "^7.18.1"
+    "react-router-dom": "^7.18.1",
+    "react-simple-maps": "^3.0.0",
+    "world-atlas": "^2.0.2"
+  },
+  "overrides": {
+    "d3-color": "^3.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

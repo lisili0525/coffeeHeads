@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface ThreadViewRepository extends JpaRepository<ThreadView, Long> {
     Optional<ThreadView> findByUserIdAndThreadId(Long userId, Long threadId);
     List<ThreadView> findByUserIdOrderByViewedAtDesc(Long userId);
+    void deleteByThreadId(Long threadId);
 }
