@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { api } from "../api";
 import Pagination from "../components/Pagination";
 
@@ -9,6 +9,18 @@ export default function SearchResults() {
   const [threads, setThreads] = useState([]);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const navigate = useNavigate();
+
+  function openThread(slug) {
+    navigate(`/threads/${slug}`);
+  }
+
+  function handleThreadKeyDown(e, slug) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openThread(slug);
+    }
+  }
 
   const [prevQ, setPrevQ] = useState(q);
   if (q !== prevQ) {
@@ -30,7 +42,13 @@ export default function SearchResults() {
       {q && threads.length === 0 && <p>No threads match your search.</p>}
       <ul className="thread-list">
         {threads.map((t) => (
-          <li key={t.id}>
+          <li
+            key={t.id}
+            role="link"
+            tabIndex={0}
+            onClick={() => openThread(t.slug)}
+            onKeyDown={(e) => handleThreadKeyDown(e, t.slug)}
+          >
             <Link to={`/threads/${t.slug}`} className="thread-card-link">
               <span>{t.title}</span>
               <span className="thread-card-meta">by {t.author.displayName} · {t.viewCount} views</span>
@@ -38,7 +56,12 @@ export default function SearchResults() {
             {t.tags?.length > 0 && (
               <div className="tag-cloud">
                 {t.tags.map((tag) => (
-                  <Link key={tag.id} to={`/tags/${tag.name}/threads`} className="tag-badge">
+                  <Link
+                    key={tag.id}
+                    to={`/tags/${tag.name}/threads`}
+                    className="tag-badge"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     {tag.name}
                   </Link>
                 ))}

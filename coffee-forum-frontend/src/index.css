@@ -126,6 +126,11 @@ h2 { color: #4a2c2a; }
 }
 .thread-list li {
   position: relative;
+  cursor: pointer;
+}
+.thread-list li:focus-visible {
+  outline: 3px solid #6f4e37;
+  outline-offset: 3px;
 }
 .category-card-link, .thread-card-link {
   display: block;
@@ -141,11 +146,6 @@ h2 { color: #4a2c2a; }
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
-}
-.thread-card-link::after {
-  content: "";
-  position: absolute;
-  inset: 0;
 }
 .thread-card-meta {
   color: #888;

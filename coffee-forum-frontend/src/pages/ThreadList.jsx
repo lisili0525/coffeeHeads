@@ -16,6 +16,17 @@ export default function ThreadList() {
   const { user } = useAuth();
   const navigate = useNavigate();
 
+  function openThread(slug) {
+    navigate(`/threads/${slug}`);
+  }
+
+  function handleThreadKeyDown(e, slug) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openThread(slug);
+    }
+  }
+
   // Reset to page 0 when navigating to a different category. Adjusting
   // state during render (rather than in an effect) avoids an extra
   // render pass - React's documented pattern for this exact case.
@@ -53,7 +64,13 @@ export default function ThreadList() {
       <h2>{category ? category.name : "Threads"}</h2>
       <ul className="thread-list">
         {threads.map((t) => (
-          <li key={t.id}>
+          <li
+            key={t.id}
+            role="link"
+            tabIndex={0}
+            onClick={() => openThread(t.slug)}
+            onKeyDown={(e) => handleThreadKeyDown(e, t.slug)}
+          >
             <Link to={`/threads/${t.slug}`} className="thread-card-link">
               <span>{t.title}</span>
               <span className="thread-card-meta">by {t.author.displayName} · {t.viewCount} views</span>
@@ -61,7 +78,12 @@ export default function ThreadList() {
             {t.tags?.length > 0 && (
               <div className="tag-cloud">
                 {t.tags.map((tag) => (
-                  <Link key={tag.id} to={`/tags/${tag.name}/threads`} className="tag-badge">
+                  <Link
+                    key={tag.id}
+                    to={`/tags/${tag.name}/threads`}
+                    className="tag-badge"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     {tag.name}
                   </Link>
                 ))}

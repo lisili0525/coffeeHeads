@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { api } from "../api";
 import Pagination from "../components/Pagination";
 
@@ -8,6 +8,18 @@ export default function ThreadsByTag() {
   const [threads, setThreads] = useState([]);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const navigate = useNavigate();
+
+  function openThread(slug) {
+    navigate(`/threads/${slug}`);
+  }
+
+  function handleThreadKeyDown(e, slug) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openThread(slug);
+    }
+  }
 
   const [prevTagName, setPrevTagName] = useState(tagName);
   if (tagName !== prevTagName) {
@@ -27,7 +39,13 @@ export default function ThreadsByTag() {
       <h2>Threads tagged "{tagName}"</h2>
       <ul className="thread-list">
         {threads.map((t) => (
-          <li key={t.id}>
+          <li
+            key={t.id}
+            role="link"
+            tabIndex={0}
+            onClick={() => openThread(t.slug)}
+            onKeyDown={(e) => handleThreadKeyDown(e, t.slug)}
+          >
             <Link to={`/threads/${t.slug}`} className="thread-card-link">
               <span>{t.title}</span>
               <span className="thread-card-meta">by {t.author.displayName} · {t.viewCount} views</span>
