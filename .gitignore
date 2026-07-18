@@ -1,0 +1,19 @@
+# Java / Maven
+target/
+
+# Node
+node_modules/
+dist/
+
+# Environment files (may contain secrets later)
+.env
+.env.local
+*.env
+
+# OS/editor cruft
+.DS_Store
+.idea/
+*.iml
+
+# Leftover scaffold artifact
+concurrent-content-service.zip
