@@ -20,6 +20,9 @@ export default function Home() {
       </p>
 
       <div className="hero-actions">
+        <Link to="/coffeepedia" className="btn-primary">
+          CoffeePedia
+        </Link>
         <Link to="/categories" className="btn-primary">
           Browse Categories
         </Link>
