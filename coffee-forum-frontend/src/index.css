@@ -61,3 +61,13 @@ button {
 }
 button:hover { background: #4a2c2a; }
 .error { color: #b00020; }
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.pagination button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}

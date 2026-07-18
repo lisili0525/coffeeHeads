@@ -1,16 +1,17 @@
 package com.coffeeforum.concurrentcontentservice.repository;
 
 import com.coffeeforum.concurrentcontentservice.model.ForumThread;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface ForumThreadRepository extends JpaRepository<ForumThread, Long> {
     Optional<ForumThread> findBySlug(String slug);
-    List<ForumThread> findByCategoryId(Long categoryId);
+    Page<ForumThread> findByCategoryId(Long categoryId, Pageable pageable);
 
     @Modifying
     @Query("UPDATE ForumThread t SET t.viewCount = t.viewCount + 1 WHERE t.id = :threadId")

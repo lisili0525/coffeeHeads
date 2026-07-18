@@ -2,18 +2,33 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { api } from "../api";
 import { useAuth } from "../AuthContext";
+import Pagination from "../components/Pagination";
 
 export default function ThreadList() {
   const { categoryId } = useParams();
   const [threads, setThreads] = useState([]);
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const { user } = useAuth();
   const navigate = useNavigate();
 
+  // Reset to page 0 when navigating to a different category. Adjusting
+  // state during render (rather than in an effect) avoids an extra
+  // render pass - React's documented pattern for this exact case.
+  const [prevCategoryId, setPrevCategoryId] = useState(categoryId);
+  if (categoryId !== prevCategoryId) {
+    setPrevCategoryId(categoryId);
+    setPage(0);
+  }
+
   useEffect(() => {
-    api.getThreadsByCategory(categoryId).then(setThreads).catch(console.error);
-  }, [categoryId]);
+    api.getThreadsByCategory(categoryId, page).then((data) => {
+      setThreads(data.content);
+      setTotalPages(data.totalPages);
+    }).catch(console.error);
+  }, [categoryId, page]);
 
   async function handleCreate(e) {
     e.preventDefault();
@@ -37,6 +52,7 @@ export default function ThreadList() {
           </li>
         ))}
       </ul>
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
 
       {user && (
         <form onSubmit={handleCreate} className="create-form">

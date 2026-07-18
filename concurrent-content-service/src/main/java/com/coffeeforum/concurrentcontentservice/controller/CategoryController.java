@@ -2,11 +2,10 @@ package com.coffeeforum.concurrentcontentservice.controller;
 
 import com.coffeeforum.concurrentcontentservice.model.Category;
 import com.coffeeforum.concurrentcontentservice.repository.CategoryRepository;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/categories")
@@ -18,14 +17,17 @@ public class CategoryController {
         this.categoryRepository = categoryRepository;
     }
 
+    // Not cached: Page<T> is backed by PageImpl, which has no default
+    // constructor Jackson can deserialize into without extra Spring Data
+    // Jackson-module wiring for our Jackson 3-based Redis serializer, and
+    // caching would fan out one Redis key per page/size combo for a table
+    // that only ever holds a handful of rows. Not worth the complexity here.
     @GetMapping
-    @Cacheable("categories")
-    public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+    public Page<Category> getAllCategories(@PageableDefault(size = 10) Pageable pageable) {
+        return categoryRepository.findAll(pageable);
     }
 
     @PostMapping
-    @CacheEvict(value = "categories", allEntries = true)
     public Category createCategory(@RequestBody Category category) {
         return categoryRepository.save(category);
     }

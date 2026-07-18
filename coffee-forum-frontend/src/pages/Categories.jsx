@@ -2,23 +2,31 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../api";
 import { useAuth } from "../AuthContext";
+import Pagination from "../components/Pagination";
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const { user } = useAuth();
 
   useEffect(() => {
-    api.getCategories().then(setCategories).catch(console.error);
-  }, []);
+    api.getCategories(page).then((data) => {
+      setCategories(data.content);
+      setTotalPages(data.totalPages);
+    }).catch(console.error);
+  }, [page]);
 
   async function handleCreate(e) {
     e.preventDefault();
     const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
     try {
-      const created = await api.createCategory(name, slug, description);
-      setCategories([...categories, created]);
+      await api.createCategory(name, slug, description);
+      const data = await api.getCategories(page);
+      setCategories(data.content);
+      setTotalPages(data.totalPages);
       setName("");
       setDescription("");
     } catch (err) {
@@ -37,6 +45,7 @@ export default function Categories() {
           </li>
         ))}
       </ul>
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
 
       {user?.role === "ADMIN" && (
         <form onSubmit={handleCreate} className="create-form">

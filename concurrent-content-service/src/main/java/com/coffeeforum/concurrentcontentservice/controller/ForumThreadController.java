@@ -11,13 +11,14 @@ import com.coffeeforum.concurrentcontentservice.repository.CategoryRepository;
 import com.coffeeforum.concurrentcontentservice.repository.ForumThreadRepository;
 import com.coffeeforum.concurrentcontentservice.repository.UserRepository;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/threads")
@@ -39,8 +40,9 @@ public class ForumThreadController {
     }
 
     @GetMapping
-    public List<ForumThread> getAllThreads() {
-        return threadRepository.findAll();
+    public Page<ForumThread> getAllThreads(
+            @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+        return threadRepository.findAll(pageable);
     }
 
     @GetMapping("/{slug}")
@@ -73,8 +75,10 @@ public class ForumThreadController {
     }
 
     @GetMapping("/category/{categoryId}")
-    public List<ForumThread> getThreadsByCategory(@PathVariable Long categoryId) {
-        return threadRepository.findByCategoryId(categoryId);
+    public Page<ForumThread> getThreadsByCategory(
+            @PathVariable Long categoryId,
+            @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+        return threadRepository.findByCategoryId(categoryId, pageable);
     }
 
     @PostMapping

@@ -36,7 +36,8 @@ export const api = {
       body: JSON.stringify({ email, password }),
     }),
 
-  getCategories: () => request("/categories"),
+  getCategories: (page = 0, size = 10) =>
+    request(`/categories?page=${page}&size=${size}`),
 
   createCategory: (name, slug, description) =>
     request("/categories", {
@@ -44,10 +45,11 @@ export const api = {
       body: JSON.stringify({ name, slug, description }),
     }),
 
-  getThreads: () => request("/threads"),
+  getThreads: (page = 0, size = 10) =>
+    request(`/threads?page=${page}&size=${size}`),
 
-  getThreadsByCategory: (categoryId) =>
-    request(`/threads/category/${categoryId}`),
+  getThreadsByCategory: (categoryId, page = 0, size = 10) =>
+    request(`/threads/category/${categoryId}?page=${page}&size=${size}`),
 
   getThread: (slug) => request(`/threads/${slug}`),
 
