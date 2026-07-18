@@ -121,6 +121,19 @@ h2 { color: #4a2c2a; }
   color: #6f4e37;
   text-decoration: none;
 }
+.category-list li {
+  padding: 0;
+}
+.category-card-link {
+  display: block;
+  padding: 1rem;
+}
+.category-card-link p {
+  margin-bottom: 0;
+  color: #4a2c2a;
+  font-size: 1rem;
+  font-weight: normal;
+}
 .meta { color: #888; font-size: 0.9rem; }
 .create-form, .auth-form {
   max-width: 500px;

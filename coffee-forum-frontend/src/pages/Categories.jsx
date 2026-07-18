@@ -40,8 +40,10 @@ export default function Categories() {
       <ul className="category-list">
         {categories.map((c) => (
           <li key={c.id}>
-            <Link to={`/categories/${c.id}/threads`}>{c.name}</Link>
-            <p>{c.description}</p>
+            <Link to={`/categories/${c.id}/threads`} className="category-card-link">
+              <span>{c.name}</span>
+              <p>{c.description}</p>
+            </Link>
           </li>
         ))}
       </ul>
