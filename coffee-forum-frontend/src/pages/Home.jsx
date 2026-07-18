@@ -23,7 +23,7 @@ export default function Home() {
         <Link to="/coffeepedia" className="btn-primary">
           CoffeePedia
         </Link>
-        <Link to="/categories" className="btn-primary">
+        <Link to="/categories" className="btn-secondary">
           Browse Categories
         </Link>
         {!user && (
