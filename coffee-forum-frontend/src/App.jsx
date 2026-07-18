@@ -13,6 +13,7 @@ import ThreadsByTag from "./pages/ThreadsByTag";
 import History from "./pages/History";
 import SearchResults from "./pages/SearchResults";
 import Coffeepedia from "./pages/Coffeepedia";
+import Suggestions from "./pages/Suggestions";
 
 function SearchBox({ onNavigate }) {
   const [q, setQ] = useState("");
@@ -57,11 +58,15 @@ function Nav() {
         </div>
       </nav>
       <Drawer open={drawerOpen} onClose={closeDrawer}>
+        <Link to="/" onClick={closeDrawer}>Home</Link>
         <SearchBox onNavigate={closeDrawer} />
         <Link to="/categories" onClick={closeDrawer}>Categories</Link>
         <Link to="/tags" onClick={closeDrawer}>Tags</Link>
         {user ? (
-          <Link to="/history" onClick={closeDrawer}>My History</Link>
+          <>
+            <Link to="/suggestions" onClick={closeDrawer}>Suggestions</Link>
+            <Link to="/history" onClick={closeDrawer}>My History</Link>
+          </>
         ) : (
           <>
             <Link to="/login" onClick={closeDrawer}>Log In</Link>
@@ -96,6 +101,7 @@ export default function App() {
           <Route path="/history" element={<RequireAuth><History /></RequireAuth>} />
           <Route path="/search" element={<SearchResults />} />
           <Route path="/coffeepedia" element={<Coffeepedia />} />
+          <Route path="/suggestions" element={<RequireAuth><Suggestions /></RequireAuth>} />
         </Routes>
       </main>
     </div>

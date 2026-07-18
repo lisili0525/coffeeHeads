@@ -92,6 +92,14 @@ export const api = {
   deleteReply: (threadId, replyId) =>
     request(`/threads/${threadId}/replies/${replyId}`, { method: "DELETE" }),
 
+  getMySuggestions: () => request("/suggestions/me"),
+
+  createSuggestion: (title, body) =>
+    request("/suggestions", {
+      method: "POST",
+      body: JSON.stringify({ title, body }),
+    }),
+
   getTags: () => request("/tags"),
 
   getMyHistory: () => request("/users/me/history"),

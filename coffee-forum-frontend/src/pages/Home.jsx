@@ -23,12 +23,9 @@ export default function Home() {
         <Link to="/coffeepedia" className="btn-primary">
           CoffeePedia
         </Link>
-        <Link to="/categories" className="btn-muted">
-          Browse Categories
-        </Link>
-        {!user && (
-          <Link to="/register" className="btn-secondary">
-            Join the Conversation
+        {user && (
+          <Link to="/categories" className="btn-muted">
+            Browse Categories
           </Link>
         )}
       </div>

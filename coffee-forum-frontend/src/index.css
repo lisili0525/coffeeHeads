@@ -101,8 +101,8 @@ nav a { color: white; text-decoration: none; font-weight: bold; }
 .drawer-content .search-box input { width: 100%; }
 main { max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
 h2 { color: #4a2c2a; }
-.category-list, .thread-list, .reply-list { list-style: none; padding: 0; }
-.category-list li, .thread-list li, .reply-list li {
+.category-list, .thread-list, .reply-list, .suggestion-list { list-style: none; padding: 0; }
+.category-list li, .thread-list li, .reply-list li, .suggestion-list li {
   padding: 1rem;
   margin-bottom: 1.25rem;
   background: white;
@@ -111,7 +111,7 @@ h2 { color: #4a2c2a; }
   box-shadow: var(--toon-shadow);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-.category-list li:hover, .thread-list li:hover, .reply-list li:hover {
+.category-list li:hover, .thread-list li:hover, .reply-list li:hover, .suggestion-list li:hover {
   transform: translate(-2px, -2px);
   box-shadow: 7px 7px 0 var(--ink);
 }
@@ -153,6 +153,17 @@ h2 { color: #4a2c2a; }
   font-weight: normal;
 }
 .meta { color: #888; font-size: 0.9rem; }
+.success { color: #246b3d; }
+.suggestion-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: #6f4e37;
+}
+.suggestion-header span {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
 .create-form, .auth-form {
   max-width: 500px;
   margin-top: 2rem;
