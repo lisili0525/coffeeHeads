@@ -47,6 +47,8 @@ export const api = {
       body: JSON.stringify({ name, slug, description }),
     }),
 
+  deleteCategory: (id) => request(`/categories/${id}`, { method: "DELETE" }),
+
   getThreads: (page = 0, size = 10) =>
     request(`/threads?page=${page}&size=${size}`),
 
@@ -101,6 +103,14 @@ export const api = {
     }),
 
   getTags: () => request("/tags"),
+
+  createTag: (name) =>
+    request("/tags", {
+      method: "POST",
+      body: JSON.stringify({ name }),
+    }),
+
+  deleteTag: (id) => request(`/tags/${id}`, { method: "DELETE" }),
 
   getMyHistory: () => request("/users/me/history"),
 };

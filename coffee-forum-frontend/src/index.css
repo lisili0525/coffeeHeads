@@ -146,6 +146,16 @@ h2 { color: #4a2c2a; }
   display: block;
   padding: 1rem;
 }
+.category-list li { display: flex; flex-direction: column; }
+.delete-inline {
+  align-self: flex-end;
+  margin: 0 1rem 1rem;
+  padding: 0.4rem 1rem;
+  min-height: auto;
+  background: #a8402b;
+  font-size: 0.85rem;
+}
+.delete-inline:hover { background: #8c3322; }
 .category-card-link p {
   margin-bottom: 0;
   color: #4a2c2a;
@@ -304,6 +314,17 @@ button:disabled:active { transform: none; box-shadow: var(--toon-shadow-sm); }
   transition: transform 0.1s ease;
 }
 .tag-badge:hover { background: #e5d5bc; transform: scale(1.08) rotate(-2deg); }
+.tag-badge-group { display: inline-flex; align-items: center; gap: 0.3rem; }
+.tag-badge-group .delete-inline {
+  align-self: auto;
+  margin: 0;
+  min-height: 28px;
+  min-width: 28px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 1rem;
+  line-height: 1;
+}
 .item-actions {
   display: flex;
   gap: 0.5rem;

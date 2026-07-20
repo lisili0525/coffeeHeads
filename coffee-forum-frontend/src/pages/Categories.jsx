@@ -34,6 +34,18 @@ export default function Categories() {
     }
   }
 
+  async function handleDelete(id) {
+    if (!confirm("Delete this category? This only works if it has no threads.")) return;
+    try {
+      await api.deleteCategory(id);
+      const data = await api.getCategories(page);
+      setCategories(data.content);
+      setTotalPages(data.totalPages);
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+
   return (
     <div>
       <h2>Categories</h2>
@@ -44,6 +56,9 @@ export default function Categories() {
               <span>{c.name}</span>
               <p>{c.description}</p>
             </Link>
+            {user?.role === "ADMIN" && (
+              <button className="delete-inline" onClick={() => handleDelete(c.id)}>Delete</button>
+            )}
           </li>
         ))}
       </ul>
