@@ -7,7 +7,8 @@ export default function Home() {
   return (
     <div className="hero">
       <span className="hero-icon">☕</span>
-      <h1>Welcome to CoffeeHeads</h1>
+      <p className="hero-meta">forum.exe — coffee enthusiasts only</p>
+      <h1>hi! it's <span className="hero-accent">CoffeeHeads</span></h1>
       <p className="hero-tagline">
         A place for coffee enthusiasts to talk brewing, beans, gears, and more.
       </p>

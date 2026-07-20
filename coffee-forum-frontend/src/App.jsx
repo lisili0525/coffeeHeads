@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route, Link, Navigate, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import Drawer from "./components/Drawer";
 import Home from "./pages/Home";
@@ -134,26 +134,48 @@ function RequireAuth({ children }) {
   return children;
 }
 
+function titlebarLabel(pathname) {
+  const segment = pathname.split("/").filter(Boolean)[0];
+  return segment ? segment.replace(/-/g, " ") : "home";
+}
+
+function OsTitlebar() {
+  const { pathname } = useLocation();
+  return (
+    <div className="os-titlebar">
+      <span className="os-dots">
+        <span className="os-dot" />
+        <span className="os-dot" />
+        <span className="os-dot" />
+      </span>
+      <span className="os-titlebar-label">coffeeheads — {titlebarLabel(pathname)}</span>
+    </div>
+  );
+}
+
 export default function App() {
   return (
-    <div className="app">
-      <Nav />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/categories" element={<Categories />} />
-          <Route path="/categories/:categoryId/threads" element={<ThreadList />} />
-          <Route path="/threads/:slug" element={<ThreadDetail />} />
-          <Route path="/tags" element={<Tags />} />
-          <Route path="/tags/:tagName/threads" element={<ThreadsByTag />} />
-          <Route path="/history" element={<RequireAuth><History /></RequireAuth>} />
-          <Route path="/search" element={<SearchResults />} />
-          <Route path="/coffeepedia" element={<Coffeepedia />} />
-          <Route path="/suggestions" element={<RequireAuth><Suggestions /></RequireAuth>} />
-        </Routes>
-      </main>
+    <div className="os-window">
+      <OsTitlebar />
+      <div className="app">
+        <Nav />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/categories/:categoryId/threads" element={<ThreadList />} />
+            <Route path="/threads/:slug" element={<ThreadDetail />} />
+            <Route path="/tags" element={<Tags />} />
+            <Route path="/tags/:tagName/threads" element={<ThreadsByTag />} />
+            <Route path="/history" element={<RequireAuth><History /></RequireAuth>} />
+            <Route path="/search" element={<SearchResults />} />
+            <Route path="/coffeepedia" element={<Coffeepedia />} />
+            <Route path="/suggestions" element={<RequireAuth><Suggestions /></RequireAuth>} />
+          </Routes>
+        </main>
+      </div>
     </div>
   );
 }
