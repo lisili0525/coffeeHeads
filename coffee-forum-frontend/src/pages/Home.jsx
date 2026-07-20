@@ -57,7 +57,7 @@ export default function Home() {
         </Link>
         {user && (
           <Link to="/categories" className="btn-muted">
-            Browse Categories
+            What are people discussing?
           </Link>
         )}
       </div>
