@@ -2,6 +2,7 @@ package com.coffeeforum.concurrentcontentservice.controller;
 
 import com.coffeeforum.concurrentcontentservice.model.Category;
 import com.coffeeforum.concurrentcontentservice.repository.CategoryRepository;
+import com.coffeeforum.concurrentcontentservice.repository.ForumThreadRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.*;
 public class CategoryController {
 
     private final CategoryRepository categoryRepository;
+    private final ForumThreadRepository threadRepository;
 
-    public CategoryController(CategoryRepository categoryRepository) {
+    public CategoryController(CategoryRepository categoryRepository, ForumThreadRepository threadRepository) {
         this.categoryRepository = categoryRepository;
+        this.threadRepository = threadRepository;
     }
 
     // Not cached: Page<T> is backed by PageImpl, which has no default
@@ -41,5 +44,18 @@ public class CategoryController {
     @PostMapping
     public Category createCategory(@RequestBody Category category) {
         return categoryRepository.save(category);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCategory(@PathVariable Long id) {
+        Category category = categoryRepository.findById(id).orElse(null);
+        if (category == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category not found");
+        }
+        if (threadRepository.existsByCategoryId(id)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Category still has threads; delete or move them first");
+        }
+        categoryRepository.delete(category);
+        return ResponseEntity.noContent().build();
     }
 }

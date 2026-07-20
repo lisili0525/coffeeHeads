@@ -41,6 +41,16 @@ nav a { color: white; text-decoration: none; font-weight: bold; }
   cursor: pointer;
 }
 .hamburger:hover { background: rgba(255, 255, 255, 0.15); border-radius: 8px; }
+.music-toggle {
+  background: transparent;
+  border: none;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem;
+  cursor: pointer;
+}
+.music-toggle:hover { background: rgba(255, 255, 255, 0.15); border-radius: 8px; }
 .search-box input {
   padding: 0.4rem 0.8rem;
   border-radius: 999px;

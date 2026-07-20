@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import Drawer from "./components/Drawer";
@@ -35,6 +35,55 @@ function SearchBox({ onNavigate }) {
   );
 }
 
+function MusicToggle() {
+  const audioRef = useRef(null);
+  const [playing, setPlaying] = useState(false);
+
+  function toggleMusic() {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (playing) {
+      audio.pause();
+      setPlaying(false);
+    } else {
+      audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+    }
+  }
+
+  return (
+    <>
+      <audio ref={audioRef} src="/music/background.mp3" loop preload="none" />
+      <button
+        className="music-toggle"
+        onClick={toggleMusic}
+        aria-label={playing ? "Mute background music" : "Play background music"}
+        aria-pressed={playing}
+      >
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor" />
+          {playing ? (
+            <path
+              d="M16.5 8.5a5 5 0 0 1 0 7"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          ) : (
+            <path
+              d="M16 9l4 6M20 9l-4 6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          )}
+        </svg>
+      </button>
+    </>
+  );
+}
+
 function Nav() {
   const { user, logout } = useAuth();
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -49,6 +98,7 @@ function Nav() {
         <Link to="/" className="brand">CoffeeHeads</Link>
         <div className="nav-links">
           <Link to="/coffeepedia">Coffeepedia</Link>
+          <MusicToggle />
           {user && (
             <>
               <span>{user.sub} ({user.role})</span>

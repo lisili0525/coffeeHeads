@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface ForumThreadRepository extends JpaRepository<ForumThread, Long> {
     Optional<ForumThread> findBySlug(String slug);
     Page<ForumThread> findByCategoryId(Long categoryId, Pageable pageable);
+    boolean existsByCategoryId(Long categoryId);
     Page<ForumThread> findByTagsName(String tagName, Pageable pageable);
 
     // Simple LIKE-based search - fine at this table size. A larger forum
