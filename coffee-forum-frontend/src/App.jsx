@@ -92,13 +92,14 @@ function Nav() {
   return (
     <>
       <nav>
-        <button className="hamburger" onClick={() => setDrawerOpen(true)} aria-label="Open menu">
-          &#9776;
-        </button>
+        <div className="nav-start">
+          <button className="hamburger" onClick={() => setDrawerOpen(true)} aria-label="Open menu">
+            &#9776;
+          </button>
+          <MusicToggle />
+        </div>
         <Link to="/" className="brand">CoffeeHeads</Link>
         <div className="nav-links">
-          <Link to="/coffeepedia">Coffeepedia</Link>
-          <MusicToggle />
           {user && (
             <>
               <span>{user.sub} ({user.role})</span>
