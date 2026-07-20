@@ -15,6 +15,7 @@ import SearchResults from "./pages/SearchResults";
 import Coffeepedia from "./pages/Coffeepedia";
 import ProcessingMethods from "./pages/ProcessingMethods";
 import FarmDetail from "./pages/FarmDetail";
+import News from "./pages/News";
 import Suggestions from "./pages/Suggestions";
 
 function SearchBox({ onNavigate }) {
@@ -118,6 +119,7 @@ function Nav() {
         <Link to="/categories" onClick={closeDrawer}>Categories</Link>
         <Link to="/tags" onClick={closeDrawer}>Tags</Link>
         <Link to="/coffeepedia" onClick={closeDrawer}>Coffeepedia</Link>
+        <Link to="/news" onClick={closeDrawer}>Coffee News</Link>
         {user ? (
           <>
             <Link to="/suggestions" onClick={closeDrawer}>Suggestions</Link>
@@ -180,6 +182,7 @@ export default function App() {
             <Route path="/coffeepedia" element={<Coffeepedia />} />
             <Route path="/coffeepedia/processing-methods" element={<ProcessingMethods />} />
             <Route path="/coffeepedia/farms/:slug" element={<FarmDetail />} />
+            <Route path="/news" element={<News />} />
             <Route path="/suggestions" element={<RequireAuth><Suggestions /></RequireAuth>} />
           </Routes>
         </main>

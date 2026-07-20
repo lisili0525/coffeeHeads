@@ -52,6 +52,9 @@ export default function Home() {
         <Link to="/coffeepedia" className="btn-primary">
           CoffeePedia
         </Link>
+        <Link to="/news" className="btn-secondary">
+          Coffee News
+        </Link>
         {user && (
           <Link to="/categories" className="btn-muted">
             Browse Categories

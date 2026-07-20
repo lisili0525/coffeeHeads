@@ -352,6 +352,27 @@ button:disabled:active { transform: none; box-shadow: var(--toon-shadow-sm); }
   background: #ccc;
   color: #888;
 }
+.news-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+.news-header-illustration {
+  width: 100px;
+  height: auto;
+  flex-shrink: 0;
+}
+.news-header h2 { margin-bottom: 0.3rem; }
+.news-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #6f4e37;
+  text-decoration: none;
+}
+.news-title:hover { color: var(--accent-dark); }
+.news-summary { margin: 0.5rem 0 0; line-height: 1.5; }
+.reply-list .delete-inline { display: block; margin-left: auto; }
 .hero {
   text-align: center;
   padding: 3rem 1rem;

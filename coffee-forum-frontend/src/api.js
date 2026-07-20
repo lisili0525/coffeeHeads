@@ -113,4 +113,9 @@ export const api = {
   deleteTag: (id) => request(`/tags/${id}`, { method: "DELETE" }),
 
   getMyHistory: () => request("/users/me/history"),
+
+  getNews: (page = 0, size = 10) =>
+    request(`/news?page=${page}&size=${size}`),
+
+  deleteNewsItem: (id) => request(`/news/${id}`, { method: "DELETE" }),
 };
