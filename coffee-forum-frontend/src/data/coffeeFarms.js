@@ -1,7 +1,9 @@
 // lat/lng in decimal degrees, used to project markers onto the equirectangular WorldMap.
+// slug is used to route to each region's detail page (see farmDetails.js).
 export const coffeeFarms = [
   {
     name: "Yirgacheffe",
+    slug: "yirgacheffe",
     country: "Ethiopia",
     lat: 6.2,
     lng: 38.2,
@@ -9,6 +11,7 @@ export const coffeeFarms = [
   },
   {
     name: "Huila",
+    slug: "huila",
     country: "Colombia",
     lat: 2.5,
     lng: -75.5,
@@ -16,6 +19,7 @@ export const coffeeFarms = [
   },
   {
     name: "Minas Gerais",
+    slug: "minas-gerais",
     country: "Brazil",
     lat: -19.9,
     lng: -43.9,
@@ -23,6 +27,7 @@ export const coffeeFarms = [
   },
   {
     name: "Antigua",
+    slug: "antigua",
     country: "Guatemala",
     lat: 14.6,
     lng: -90.7,
@@ -30,6 +35,7 @@ export const coffeeFarms = [
   },
   {
     name: "Boquete",
+    slug: "boquete",
     country: "Panama",
     lat: 8.78,
     lng: -82.44,
@@ -37,6 +43,7 @@ export const coffeeFarms = [
   },
   {
     name: "Tarrazu",
+    slug: "tarrazu",
     country: "Costa Rica",
     lat: 9.65,
     lng: -83.93,
@@ -44,6 +51,7 @@ export const coffeeFarms = [
   },
   {
     name: "Blue Mountains",
+    slug: "blue-mountains",
     country: "Jamaica",
     lat: 18.1,
     lng: -76.6,
@@ -51,6 +59,7 @@ export const coffeeFarms = [
   },
   {
     name: "Mandheling",
+    slug: "mandheling",
     country: "Indonesia (Sumatra)",
     lat: 2.6,
     lng: 98.9,
@@ -58,6 +67,7 @@ export const coffeeFarms = [
   },
   {
     name: "Kona",
+    slug: "kona",
     country: "USA (Hawaii)",
     lat: 19.6,
     lng: -155.9,

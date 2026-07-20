@@ -58,12 +58,15 @@ export default function Coffeepedia() {
 
       <section>
         <h3>Famous Coffee-Growing Regions</h3>
-        <p>Hover a marker for the region name, or scan the list below the map for details.</p>
+        <p>Hover a marker for the region name, click it for the full story, or scan the list below the map.</p>
         <WorldMap farms={coffeeFarms} />
         <ol className="farm-legend">
           {coffeeFarms.map((farm) => (
             <li key={farm.name}>
-              <strong>{farm.name}, {farm.country}</strong> - {farm.note}
+              <Link to={`/coffeepedia/farms/${farm.slug}`}>
+                <strong>{farm.name}, {farm.country}</strong>
+              </Link>
+              {" "}- {farm.note}
             </li>
           ))}
         </ol>

@@ -296,3 +296,137 @@ export function WetHulledIllustration({ className }) {
     </svg>
   );
 }
+
+const TERRAIN_BASE_FILL = {
+  "terraced-highlands": "#cbb89a",
+  "steep-slope": "#a9c98f",
+  "rolling-hills": "#c9a86a",
+  volcano: "#8a6a5a",
+  "misty-mountains": "#9fb5a6",
+  "jungle-lowland": "#7c9b6a",
+  "coastal-slope": "#8fb573",
+};
+
+// One parameterized landscape used across all farm pages so every region
+// stays visually consistent - `terrain` + `accent` are enough to make each
+// one read as distinct without hand-drawing a bespoke scene per farm.
+export function RegionLandscapeIllustration({ terrain, accent = "#e07b39", className }) {
+  const base = TERRAIN_BASE_FILL[terrain] || "#cbb89a";
+  return (
+    <svg viewBox="0 0 240 170" className={className} aria-hidden="true">
+      <circle cx="200" cy="34" r="18" fill={accent} stroke="#2b2118" strokeWidth="3" />
+      <g stroke={accent} strokeWidth="3" strokeLinecap="round">
+        <path d="M200 6 v-10" />
+        <path d="M224 14 l7 -7" />
+        <path d="M232 34 h10" />
+        <path d="M224 54 l7 7" />
+      </g>
+
+      {terrain === "terraced-highlands" && (
+        <g>
+          <path d="M0 150 L60 90 L120 120 L180 70 L240 105 V170 H0 Z" fill={base} stroke="#2b2118" strokeWidth="3" strokeLinejoin="round" />
+          <path d="M10 140 H90 M30 122 H150 M60 104 H210" stroke="#2b2118" strokeWidth="2" opacity="0.35" />
+        </g>
+      )}
+
+      {terrain === "steep-slope" && (
+        <g>
+          <path d="M0 170 L100 40 L150 90 L240 60 V170 Z" fill={base} stroke="#2b2118" strokeWidth="3" strokeLinejoin="round" />
+          <path d="M40 130 L90 78 M60 150 L120 92 M80 168 L150 108" stroke="#2b2118" strokeWidth="2" opacity="0.3" />
+        </g>
+      )}
+
+      {terrain === "rolling-hills" && (
+        <g>
+          <path d="M0 130 Q40 100 80 125 T160 120 T240 110 V170 H0 Z" fill={base} stroke="#2b2118" strokeWidth="3" strokeLinejoin="round" />
+          <path d="M0 150 Q50 128 100 148 T240 138 V170 H0 Z" fill={base} opacity="0.7" stroke="#2b2118" strokeWidth="2.5" strokeLinejoin="round" />
+        </g>
+      )}
+
+      {terrain === "volcano" && (
+        <g>
+          <path d="M20 170 L70 110 L110 150 V170 Z" fill={base} opacity="0.8" stroke="#2b2118" strokeWidth="2.5" strokeLinejoin="round" />
+          <path d="M60 170 L120 40 L180 170 Z" fill={base} stroke="#2b2118" strokeWidth="3" strokeLinejoin="round" />
+          <circle cx="120" cy="44" r="8" fill={accent} stroke="#2b2118" strokeWidth="2" />
+          <path d="M120 30 q10 -14 -4 -24" fill="none" stroke="#8a6a5a" strokeWidth="3" strokeLinecap="round" opacity="0.6" />
+        </g>
+      )}
+
+      {terrain === "misty-mountains" && (
+        <g>
+          <path d="M0 170 L50 90 L90 140 L140 60 L180 130 L240 95 V170 Z" fill={base} stroke="#2b2118" strokeWidth="3" strokeLinejoin="round" />
+          <rect x="0" y="118" width="240" height="10" fill="white" opacity="0.55" />
+          <rect x="0" y="138" width="240" height="8" fill="white" opacity="0.4" />
+        </g>
+      )}
+
+      {terrain === "jungle-lowland" && (
+        <g>
+          {[30, 70, 110, 150, 190].map((cx, i) => (
+            <circle key={cx} cx={cx} cy={120 - (i % 2) * 12} r={26} fill={base} stroke="#2b2118" strokeWidth="2.5" opacity="0.92" />
+          ))}
+          <rect x="0" y="130" width="240" height="40" fill={base} stroke="#2b2118" strokeWidth="3" />
+          <path d="M0 108 H240 M0 96 H240" stroke="white" strokeWidth="4" opacity="0.3" />
+        </g>
+      )}
+
+      {terrain === "coastal-slope" && (
+        <g>
+          <path d="M0 170 L90 70 L170 120 L240 100 V170 Z" fill={base} stroke="#2b2118" strokeWidth="3" strokeLinejoin="round" />
+          <path d="M0 150 Q30 144 60 150 T120 150 T180 150 T240 150" fill="none" stroke="#cdeaf2" strokeWidth="6" strokeLinecap="round" />
+          <path d="M0 160 Q30 154 60 160 T120 160 T180 160 T240 160" fill="none" stroke="#cdeaf2" strokeWidth="5" strokeLinecap="round" opacity="0.7" />
+        </g>
+      )}
+
+      {[36, 96, 160, 206].map((cx) => (
+        <g key={cx} transform={`translate(${cx} 158)`}>
+          <path d="M0 0 v-10" stroke="#2b2118" strokeWidth="2.5" strokeLinecap="round" />
+          <circle cy="-16" r="9" fill="#7fa876" stroke="#2b2118" strokeWidth="2" />
+        </g>
+      ))}
+      <Bean x="20" y="164" scale="0.6" rotate="-10" />
+      <Bean x="220" y="164" scale="0.6" rotate="15" fill="#8a6a5a" />
+    </svg>
+  );
+}
+
+const FLAVOR_NOTE_INFO = {
+  floral: { color: "#c98ac2", label: "floral" },
+  citrus: { color: "#e0ac3f", label: "citrus" },
+  berry: { color: "#b0402f", label: "berry" },
+  chocolate: { color: "#4a2c2a", label: "chocolate" },
+  nutty: { color: "#a67c52", label: "nutty" },
+  spice: { color: "#c9752e", label: "spice" },
+  earthy: { color: "#7a6a52", label: "earthy" },
+  herbal: { color: "#5c7a48", label: "herbal" },
+  tropical: { color: "#7fa876", label: "tropical" },
+  honeyed: { color: "#d9a441", label: "honeyed" },
+};
+
+export function FlavorProfileIllustration({ notes = [], className }) {
+  return (
+    <svg viewBox="0 0 260 160" className={className} aria-hidden="true">
+      <path
+        d="M40 60 h60 l-5 46 a10 10 0 0 1 -10 9 h-30 a10 10 0 0 1 -10 -9 Z"
+        fill="#6f4e37"
+        stroke="#2b2118"
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+      <ellipse cx="70" cy="120" rx="30" ry="7" fill="#f0e6d8" stroke="#2b2118" strokeWidth="2.5" />
+      <path d="M98 68 q18 -2 18 14 q0 14 -19 14" fill="none" stroke="#2b2118" strokeWidth="3" strokeLinecap="round" />
+      {notes.map((key, i) => {
+        const info = FLAVOR_NOTE_INFO[key];
+        if (!info) return null;
+        return (
+          <g key={key} transform={`translate(150 ${28 + i * 32})`}>
+            <circle r="9" fill={info.color} stroke="#2b2118" strokeWidth="2" />
+            <text x="16" y="4" fontSize="12" fontFamily="'JetBrains Mono', monospace" fill="#4a2c2a">
+              {info.label}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}

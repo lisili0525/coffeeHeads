@@ -533,3 +533,11 @@ button:disabled:active { transform: none; box-shadow: var(--toon-shadow-sm); }
 .map-tooltip-bg { fill: var(--ink); stroke: var(--accent); stroke-width: 1; }
 .map-tooltip-text { fill: white; font-size: 11px; }
 .farm-legend { padding-left: 1.2rem; }
+.farm-legend a { color: #6f4e37; text-decoration: none; }
+.farm-legend a:hover { color: var(--accent-dark); text-decoration: underline; }
+.flavor-profile-illustration {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  margin-top: 0.5rem;
+}

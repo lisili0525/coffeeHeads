@@ -14,6 +14,7 @@ import History from "./pages/History";
 import SearchResults from "./pages/SearchResults";
 import Coffeepedia from "./pages/Coffeepedia";
 import ProcessingMethods from "./pages/ProcessingMethods";
+import FarmDetail from "./pages/FarmDetail";
 import Suggestions from "./pages/Suggestions";
 
 function SearchBox({ onNavigate }) {
@@ -178,6 +179,7 @@ export default function App() {
             <Route path="/search" element={<SearchResults />} />
             <Route path="/coffeepedia" element={<Coffeepedia />} />
             <Route path="/coffeepedia/processing-methods" element={<ProcessingMethods />} />
+            <Route path="/coffeepedia/farms/:slug" element={<FarmDetail />} />
             <Route path="/suggestions" element={<RequireAuth><Suggestions /></RequireAuth>} />
           </Routes>
         </main>
