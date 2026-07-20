@@ -1,25 +1,42 @@
 import { useState } from "react";
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
-import landTopology from "world-atlas/land-110m.json";
+import countriesTopology from "world-atlas/countries-110m.json";
+
+// world-atlas country names don't always match the short forms used in
+// coffeeFarms.js (e.g. "USA (Hawaii)", "Indonesia (Sumatra)").
+const COUNTRY_NAME_ALIASES = {
+  USA: "United States of America",
+};
+
+function toTopologyCountryName(farmCountry) {
+  const base = farmCountry.replace(/\s*\(.*\)\s*/, "").trim();
+  return COUNTRY_NAME_ALIASES[base] || base;
+}
 
 export default function WorldMap({ farms }) {
   const [active, setActive] = useState(null);
+  const producerCountries = new Set(farms.map((f) => toTopologyCountryName(f.country)));
 
   return (
     <ComposableMap projectionConfig={{ scale: 155 }} className="world-map">
-      <Geographies geography={landTopology}>
+      <Geographies geography={countriesTopology}>
         {({ geographies }) =>
-          geographies.map((geo) => (
-            <Geography
-              key={geo.rsmKey}
-              geography={geo}
-              style={{
-                default: { fill: "#cbb89a", stroke: "#a68a63", strokeWidth: 0.5, outline: "none" },
-                hover: { fill: "#cbb89a", stroke: "#a68a63", strokeWidth: 0.5, outline: "none" },
-                pressed: { fill: "#cbb89a", stroke: "#a68a63", strokeWidth: 0.5, outline: "none" },
-              }}
-            />
-          ))
+          geographies.map((geo) => {
+            const isProducer = producerCountries.has(geo.properties.name);
+            const fill = isProducer ? "#8fb573" : "#e5d5bc";
+            const stroke = isProducer ? "#5c7a48" : "#a68a63";
+            return (
+              <Geography
+                key={geo.rsmKey}
+                geography={geo}
+                style={{
+                  default: { fill, stroke, strokeWidth: 0.5, outline: "none" },
+                  hover: { fill, stroke, strokeWidth: 0.5, outline: "none" },
+                  pressed: { fill, stroke, strokeWidth: 0.5, outline: "none" },
+                }}
+              />
+            );
+          })
         }
       </Geographies>
       {farms.map((farm, i) => (

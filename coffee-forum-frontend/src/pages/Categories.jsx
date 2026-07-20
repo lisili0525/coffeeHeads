@@ -54,27 +54,19 @@ export default function Categories() {
         {categories.map((c) => {
           const { Icon, tagline } = getCategoryVisual(c.name);
           return (
-            <Link key={c.id} to={`/categories/${c.id}/threads`} className="category-summary-card">
-              <Icon className="category-summary-icon" />
-              <h3>{c.name}</h3>
-              <p>{tagline || c.description}</p>
-            </Link>
+            <div key={c.id} className="category-summary-card-wrap">
+              <Link to={`/categories/${c.id}/threads`} className="category-summary-card">
+                <Icon className="category-summary-icon" />
+                <h3>{c.name}</h3>
+                <p>{tagline || c.description}</p>
+              </Link>
+              {user?.role === "ADMIN" && (
+                <button className="delete-inline" onClick={() => handleDelete(c.id)}>Delete</button>
+              )}
+            </div>
           );
         })}
       </div>
-      <ul className="category-list">
-        {categories.map((c) => (
-          <li key={c.id}>
-            <Link to={`/categories/${c.id}/threads`} className="category-card-link">
-              <span>{c.name}</span>
-              <p>{c.description}</p>
-            </Link>
-            {user?.role === "ADMIN" && (
-              <button className="delete-inline" onClick={() => handleDelete(c.id)}>Delete</button>
-            )}
-          </li>
-        ))}
-      </ul>
       <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
 
       {user?.role === "ADMIN" && (

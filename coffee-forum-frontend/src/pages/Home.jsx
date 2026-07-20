@@ -19,7 +19,7 @@ export default function Home() {
     <div className="hero">
       <CupSteamIllustration className="hero-illustration" />
       <p className="hero-meta">forum.exe — coffee enthusiasts only</p>
-      <h1>hi! it's <span className="hero-accent">CoffeeHeads</span></h1>
+      <h1>hi! this is <span className="hero-accent">CoffeeHeads</span></h1>
       <p className="hero-tagline">
         A place for coffee enthusiasts to talk brewing, beans, gears, and more.
       </p>
