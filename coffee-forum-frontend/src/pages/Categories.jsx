@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { api } from "../api";
 import { useAuth } from "../AuthContext";
 import Pagination from "../components/Pagination";
+import { getCategoryVisual } from "../data/categoryVisuals";
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
@@ -49,6 +50,18 @@ export default function Categories() {
   return (
     <div>
       <h2>Categories</h2>
+      <div className="category-summary-row">
+        {categories.map((c) => {
+          const { Icon, tagline } = getCategoryVisual(c.name);
+          return (
+            <Link key={c.id} to={`/categories/${c.id}/threads`} className="category-summary-card">
+              <Icon className="category-summary-icon" />
+              <h3>{c.name}</h3>
+              <p>{tagline || c.description}</p>
+            </Link>
+          );
+        })}
+      </div>
       <ul className="category-list">
         {categories.map((c) => (
           <li key={c.id}>

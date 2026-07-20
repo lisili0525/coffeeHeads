@@ -1,9 +1,19 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../AuthContext";
-import { CupSteamIllustration, BrewMethodsIcon, BeanBagIcon, GrinderIcon } from "../components/Illustrations";
+import { api } from "../api";
+import { CupSteamIllustration } from "../components/Illustrations";
+import { getCategoryVisual } from "../data/categoryVisuals";
+
+const FEATURED_CATEGORIES = ["Brew Methods", "Bean Reviews", "Gear Talk"];
 
 export default function Home() {
   const { user } = useAuth();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    api.getCategories(0, 50).then((data) => setCategories(data.content)).catch(() => {});
+  }, []);
 
   return (
     <div className="hero">
@@ -22,18 +32,20 @@ export default function Home() {
       </p>
 
       <div className="hero-icon-row">
-        <div className="hero-icon-card">
-          <BrewMethodsIcon className="hero-icon-svg" />
-          <span>Brew Methods</span>
-        </div>
-        <div className="hero-icon-card">
-          <BeanBagIcon className="hero-icon-svg" />
-          <span>Bean Reviews</span>
-        </div>
-        <div className="hero-icon-card">
-          <GrinderIcon className="hero-icon-svg" />
-          <span>Gear Talk</span>
-        </div>
+        {FEATURED_CATEGORIES.map((name) => {
+          const { Icon } = getCategoryVisual(name);
+          const category = categories.find((c) => c.name.toLowerCase() === name.toLowerCase());
+          return (
+            <Link
+              key={name}
+              to={category ? `/categories/${category.id}/threads` : "/categories"}
+              className="hero-icon-card"
+            >
+              <Icon className="hero-icon-svg" />
+              <span>{name}</span>
+            </Link>
+          );
+        })}
       </div>
 
       <div className="hero-actions">

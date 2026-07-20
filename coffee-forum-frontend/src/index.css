@@ -77,6 +77,22 @@ nav a { color: white; text-decoration: none; font-weight: bold; }
 }
 .nav-links { justify-self: end; display: flex; gap: 1rem; align-items: center; }
 .nav-links a { font-weight: normal; }
+.nav-login-btn {
+  display: inline-block;
+  background: var(--accent);
+  color: white !important;
+  border: 2px solid var(--ink);
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 700 !important;
+  box-shadow: var(--toon-shadow-sm);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
+}
+.nav-login-btn:hover { background: var(--accent-dark); }
+.nav-login-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ink);
+}
 .nav-start { justify-self: start; display: flex; align-items: center; gap: 0.4rem; }
 .hamburger {
   background: transparent;
@@ -158,6 +174,39 @@ nav a { color: white; text-decoration: none; font-weight: bold; }
 .drawer-content .search-box input { width: 100%; }
 main { max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
 h2 { color: #4a2c2a; }
+.category-summary-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin: 1.5rem 0 2rem;
+}
+.category-summary-card {
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  padding: 1.5rem 1rem;
+  background: white;
+  border-radius: 16px;
+  border: var(--toon-border);
+  box-shadow: var(--toon-shadow);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.category-summary-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 var(--ink);
+}
+.category-summary-icon {
+  width: 64px;
+  height: 64px;
+  filter: drop-shadow(3px 3px 0 var(--ink));
+}
+.category-summary-card h3 { margin: 0; color: #4a2c2a; }
+.category-summary-card p { margin: 0; font-size: 0.9rem; color: #6f4e37; line-height: 1.4; }
 .category-list, .thread-list, .reply-list, .suggestion-list { list-style: none; padding: 0; }
 .category-list li, .thread-list li, .reply-list li, .suggestion-list li {
   padding: 1rem;
@@ -325,6 +374,8 @@ button:disabled:active { transform: none; box-shadow: var(--toon-shadow-sm); }
   font-family: var(--mono);
   font-size: 0.85rem;
   color: #6f4e37;
+  text-decoration: none;
+  cursor: pointer;
 }
 .hero-icon-svg {
   width: 64px;

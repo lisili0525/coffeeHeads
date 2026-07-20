@@ -68,6 +68,15 @@ export function BeanBagIcon({ className }) {
   );
 }
 
+export function CoffeeBeanIcon({ className }) {
+  return (
+    <svg viewBox="0 0 100 100" className={className} aria-hidden="true">
+      <ellipse cx="50" cy="50" rx="32" ry="42" fill="#6f4e37" stroke="#2b2118" strokeWidth="3" />
+      <path d="M50 12 Q35 50 50 88" fill="none" stroke="#2b2118" strokeWidth="4" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export function GrinderIcon({ className }) {
   return (
     <svg viewBox="0 0 100 100" className={className} aria-hidden="true">

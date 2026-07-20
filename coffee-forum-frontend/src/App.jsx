@@ -100,11 +100,13 @@ function Nav() {
         </div>
         <Link to="/" className="brand">CoffeeHeads</Link>
         <div className="nav-links">
-          {user && (
+          {user ? (
             <>
               <span>{user.sub} ({user.role})</span>
               <button onClick={logout}>Log Out</button>
             </>
+          ) : (
+            <Link to="/login" className="nav-login-btn">Log In</Link>
           )}
         </div>
       </nav>
