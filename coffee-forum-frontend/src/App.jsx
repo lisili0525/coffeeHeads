@@ -13,6 +13,7 @@ import ThreadsByTag from "./pages/ThreadsByTag";
 import History from "./pages/History";
 import SearchResults from "./pages/SearchResults";
 import Coffeepedia from "./pages/Coffeepedia";
+import ProcessingMethods from "./pages/ProcessingMethods";
 import Suggestions from "./pages/Suggestions";
 
 function SearchBox({ onNavigate }) {
@@ -115,6 +116,7 @@ function Nav() {
         <SearchBox onNavigate={closeDrawer} />
         <Link to="/categories" onClick={closeDrawer}>Categories</Link>
         <Link to="/tags" onClick={closeDrawer}>Tags</Link>
+        <Link to="/coffeepedia" onClick={closeDrawer}>Coffeepedia</Link>
         {user ? (
           <>
             <Link to="/suggestions" onClick={closeDrawer}>Suggestions</Link>
@@ -175,6 +177,7 @@ export default function App() {
             <Route path="/history" element={<RequireAuth><History /></RequireAuth>} />
             <Route path="/search" element={<SearchResults />} />
             <Route path="/coffeepedia" element={<Coffeepedia />} />
+            <Route path="/coffeepedia/processing-methods" element={<ProcessingMethods />} />
             <Route path="/suggestions" element={<RequireAuth><Suggestions /></RequireAuth>} />
           </Routes>
         </main>

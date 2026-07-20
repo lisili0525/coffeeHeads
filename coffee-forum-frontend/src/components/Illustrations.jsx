@@ -235,3 +235,64 @@ export function SunDryingIllustration({ className }) {
     </svg>
   );
 }
+
+export function WashedProcessIllustration({ className }) {
+  return (
+    <svg viewBox="0 0 200 160" className={className} aria-hidden="true">
+      <path
+        d="M30 55 h140 l-14 72 a10 10 0 0 1 -10 8 h-92 a10 10 0 0 1 -10 -8 Z"
+        fill="#cdeaf2"
+        stroke="#2b2118"
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+      <path d="M34 66 q66 -14 132 0" fill="none" stroke="#8fc7dc" strokeWidth="3" strokeLinecap="round" />
+      <circle cx="62" cy="92" r="7" fill="#b0402f" stroke="#2b2118" strokeWidth="2" />
+      <circle cx="138" cy="88" r="7" fill="#b0402f" stroke="#2b2118" strokeWidth="2" />
+      <Bean x="82" y="112" scale="1.3" rotate="-8" fill="#6f4e37" />
+      <Bean x="117" y="118" scale="1.1" rotate="12" fill="#4a2c2a" />
+      <path d="M96 26 q4 10 0 16" fill="none" stroke="#5fa8c4" strokeWidth="3" strokeLinecap="round" />
+      <path d="M112 20 q4 10 0 16" fill="none" stroke="#5fa8c4" strokeWidth="3" strokeLinecap="round" />
+      <path d="M80 20 q4 10 0 16" fill="none" stroke="#5fa8c4" strokeWidth="3" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function HoneyProcessIllustration({ className }) {
+  return (
+    <svg viewBox="0 0 200 160" className={className} aria-hidden="true">
+      <rect x="20" y="94" width="160" height="14" rx="4" fill="#8a6a5a" stroke="#2b2118" strokeWidth="3" />
+      <path d="M30 108 l-8 30 M170 108 l8 30" stroke="#2b2118" strokeWidth="4" strokeLinecap="round" />
+      <path d="M45 108 l-6 30 M155 108 l6 30" stroke="#2b2118" strokeWidth="4" strokeLinecap="round" />
+      {[45, 70, 95, 120, 145].map((cx, i) => (
+        <g key={cx}>
+          <circle cx={cx} cy={86 - (i % 2 === 0 ? 4 : 0)} r="9" fill="#c98a2e" stroke="#2b2118" strokeWidth="2.5" />
+          <circle cx={cx - 3} cy={82 - (i % 2 === 0 ? 4 : 0)} r="2.5" fill="#f3d9a4" opacity="0.9" />
+        </g>
+      ))}
+      <path d="M148 44 q10 8 4 20" fill="none" stroke="#e0ac3f" strokeWidth="3" strokeLinecap="round" opacity="0.85" />
+      <path d="M130 36 q10 8 4 20" fill="none" stroke="#e0ac3f" strokeWidth="3" strokeLinecap="round" opacity="0.7" />
+    </svg>
+  );
+}
+
+export function WetHulledIllustration({ className }) {
+  return (
+    <svg viewBox="0 0 200 160" className={className} aria-hidden="true">
+      <path
+        d="M50 92 q50 -20 100 0 l-10 40 a14 14 0 0 1 -13 11 h-54 a14 14 0 0 1 -13 -11 Z"
+        fill="#8a6a5a"
+        stroke="#2b2118"
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+      <ellipse cx="100" cy="92" rx="50" ry="10" fill="#6f4e37" stroke="#2b2118" strokeWidth="2.5" />
+      <Bean x="90" y="90" scale="1.3" rotate="-10" fill="#4a2c2a" />
+      <Bean x="114" y="94" scale="1.1" rotate="15" fill="#6f4e37" />
+      <path d="M62 40 l20 42" stroke="#2b2118" strokeWidth="7" strokeLinecap="round" />
+      <ellipse cx="58" cy="36" rx="10" ry="13" fill="#cbb89a" stroke="#2b2118" strokeWidth="2.5" transform="rotate(-20 58 36)" />
+      <path d="M132 50 q6 8 2 18" fill="none" stroke="#5fa8c4" strokeWidth="3" strokeLinecap="round" />
+      <path d="M148 58 q6 8 2 18" fill="none" stroke="#5fa8c4" strokeWidth="3" strokeLinecap="round" />
+    </svg>
+  );
+}

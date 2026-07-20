@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import WorldMap from "../components/WorldMap";
 import { coffeeFarms } from "../data/coffeeFarms";
 import { GoatOriginIllustration, SunDryingIllustration } from "../components/Illustrations";
@@ -48,6 +49,9 @@ export default function Coffeepedia() {
             <li><strong>Honey / Pulped Natural</strong> - a middle ground: skin is removed but some sticky fruit mucilage ("honey") is left on during drying, balancing brightness and body.</li>
             <li><strong>Wet-Hulled (Giling Basah)</strong> - a method distinctive to Indonesia where the bean is hulled while still slightly wet, producing the low-acid, heavy-bodied, earthy cup associated with Sumatran coffee.</li>
           </ul>
+          <Link to="/coffeepedia/processing-methods" className="btn-secondary">
+            Read more about processing methods
+          </Link>
         </div>
         <SunDryingIllustration className="coffeepedia-illustration" />
       </section>
