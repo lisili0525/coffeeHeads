@@ -1,4 +1,14 @@
-import { BrewMethodsIcon, BeanBagIcon, GrinderIcon, CoffeeBeanIcon } from "../components/Illustrations";
+import {
+  BrewMethodsIcon,
+  BeanBagIcon,
+  GrinderIcon,
+  CoffeeBeanIcon,
+  LatteArtIcon,
+  HomeRoastingIcon,
+  CoffeeShopIcon,
+  ColdBrewIcon,
+  BeginnerQuestionsIcon,
+} from "../components/Illustrations";
 
 const VISUALS_BY_NAME = {
   "brew methods": {
@@ -13,6 +23,11 @@ const VISUALS_BY_NAME = {
     Icon: GrinderIcon,
     tagline: "Grinders, kettles, scales — the hardware nerds compare notes here.",
   },
+  "latte art": { Icon: LatteArtIcon, tagline: null },
+  "home roasting": { Icon: HomeRoastingIcon, tagline: null },
+  "coffee shops & cafes": { Icon: CoffeeShopIcon, tagline: null },
+  "cold brew & iced coffee": { Icon: ColdBrewIcon, tagline: null },
+  "beginner questions": { Icon: BeginnerQuestionsIcon, tagline: null },
 };
 
 export function getCategoryVisual(name) {

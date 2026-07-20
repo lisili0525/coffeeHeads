@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { api } from "../api";
 import { useAuth } from "../AuthContext";
 import Pagination from "../components/Pagination";
+import { getCategoryVisual } from "../data/categoryVisuals";
 
 export default function ThreadList() {
   const { categoryId } = useParams();
@@ -59,9 +60,21 @@ export default function ThreadList() {
     }
   }
 
+  const { Icon, tagline } = category ? getCategoryVisual(category.name) : {};
+
   return (
     <div>
-      <h2>{category ? category.name : "Threads"}</h2>
+      {category ? (
+        <div className="category-intro">
+          <Icon className="category-intro-icon" />
+          <div>
+            <h2>{category.name}</h2>
+            <p className="category-intro-text">{tagline || category.description}</p>
+          </div>
+        </div>
+      ) : (
+        <h2>Threads</h2>
+      )}
       <ul className="thread-list">
         {threads.map((t) => (
           <li

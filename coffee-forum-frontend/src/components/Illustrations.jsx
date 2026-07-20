@@ -89,6 +89,110 @@ export function GrinderIcon({ className }) {
   );
 }
 
+export function LatteArtIcon({ className }) {
+  return (
+    <svg viewBox="0 0 100 100" className={className} aria-hidden="true">
+      <circle cx="50" cy="50" r="38" fill="#f0e6d8" stroke="#2b2118" strokeWidth="3" />
+      <circle cx="50" cy="50" r="30" fill="#6f4e37" stroke="#2b2118" strokeWidth="2.5" />
+      <path
+        d="M50 66 C38 56 34 46 42 40 C47 37 50 41 50 44 C50 41 53 37 58 40 C66 46 62 56 50 66 Z"
+        fill="#f0e6d8"
+        stroke="#2b2118"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function HomeRoastingIcon({ className }) {
+  return (
+    <svg viewBox="0 0 100 100" className={className} aria-hidden="true">
+      <path
+        d="M22 55 q28 -14 56 0 l-6 14 a10 10 0 0 1 -9 6 h-26 a10 10 0 0 1 -9 -6 Z"
+        fill="#6f4e37"
+        stroke="#2b2118"
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+      <path d="M78 52 h13" stroke="#2b2118" strokeWidth="4" strokeLinecap="round" />
+      <Bean x="40" y="54" scale="0.8" rotate="-10" fill="#4a2c2a" />
+      <Bean x="55" y="56" scale="0.8" rotate="15" fill="#4a2c2a" />
+      <Bean x="48" y="47" scale="0.6" rotate="30" fill="#8a6a5a" />
+      <path d="M35 40 q-4 -10 3 -16" fill="none" stroke="#e07b39" strokeWidth="3" strokeLinecap="round" opacity="0.85" />
+      <path d="M50 36 q-4 -10 3 -16" fill="none" stroke="#e07b39" strokeWidth="3" strokeLinecap="round" opacity="0.7" />
+      <path d="M65 40 q-4 -10 3 -16" fill="none" stroke="#e07b39" strokeWidth="3" strokeLinecap="round" opacity="0.85" />
+    </svg>
+  );
+}
+
+export function CoffeeShopIcon({ className }) {
+  return (
+    <svg viewBox="0 0 100 100" className={className} aria-hidden="true">
+      <rect x="18" y="38" width="64" height="46" rx="4" fill="#f0e6d8" stroke="#2b2118" strokeWidth="3" />
+      <rect x="40" y="56" width="20" height="28" fill="#6f4e37" stroke="#2b2118" strokeWidth="2.5" />
+      <circle cx="56" cy="70" r="1.8" fill="#2b2118" />
+      <rect x="24" y="46" width="16" height="16" fill="#dceaf0" stroke="#2b2118" strokeWidth="2" />
+      <rect x="60" y="46" width="16" height="16" fill="#dceaf0" stroke="#2b2118" strokeWidth="2" />
+      <path d="M50 38 v-14" stroke="#2b2118" strokeWidth="3" strokeLinecap="round" />
+      <path
+        d="M50 24 h18 v14 h-18 a2 2 0 0 1 -2 -2 v-10 a2 2 0 0 1 2 -2 Z"
+        fill="#e07b39"
+        stroke="#2b2118"
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+      />
+      <path d="M56 27 v8 M62 27 v8" stroke="#2b2118" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function ColdBrewIcon({ className }) {
+  return (
+    <svg viewBox="0 0 100 100" className={className} aria-hidden="true">
+      <path
+        d="M30 30 h40 l-6 52 a6 6 0 0 1 -6 5 h-16 a6 6 0 0 1 -6 -5 Z"
+        fill="#8a6a5a"
+        stroke="#2b2118"
+        strokeWidth="3"
+        strokeLinejoin="round"
+        opacity="0.9"
+      />
+      <rect x="34" y="36" width="12" height="12" rx="2" fill="#f0e6d8" stroke="#2b2118" strokeWidth="2" transform="rotate(-8 40 42)" />
+      <rect x="52" y="46" width="12" height="12" rx="2" fill="#f0e6d8" stroke="#2b2118" strokeWidth="2" transform="rotate(10 58 52)" />
+      <path d="M68 10 l-4 12 l-6 70" fill="none" stroke="#e07b39" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function BeginnerQuestionsIcon({ className }) {
+  return (
+    <svg viewBox="0 0 100 100" className={className} aria-hidden="true">
+      <path
+        d="M28 50 h44 l-5 28 a10 10 0 0 1 -10 9 h-14 a10 10 0 0 1 -10 -9 Z"
+        fill="#6f4e37"
+        stroke="#2b2118"
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+      <path d="M72 54 q14 -2 14 12 q0 12 -15 12" fill="none" stroke="#2b2118" strokeWidth="3" strokeLinecap="round" />
+      <text
+        x="50"
+        y="40"
+        textAnchor="middle"
+        fontSize="32"
+        fontWeight="700"
+        fill="#e07b39"
+        stroke="#2b2118"
+        strokeWidth="1.2"
+        fontFamily="'Baloo 2', sans-serif"
+      >
+        ?
+      </text>
+    </svg>
+  );
+}
+
 export function GoatOriginIllustration({ className }) {
   return (
     <svg viewBox="0 0 240 190" className={className} aria-hidden="true">
